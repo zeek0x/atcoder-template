@@ -1,24 +1,24 @@
 -module('Main').
 -export([main/1]).
 
+-define(OUT(S), io:format("~s~n", [S])).
+-define(OUT_L(L, Sep),
+    begin
+        Pat = lists:concat(lists:join(Sep, lists:duplicate(length(L), "~p"))),
+        io:format(Pat ++ "~n", L)
+    end).
+-define(OUT_L(L), ?OUT_L(L, " ")).
+
 solve() ->
-    L = input("~d~d"),
-    output(L),
+    [S] = in("~s"),
+    % [N] = input("~d")
+    ?OUT(S),
     ok.
 
 main(_) ->
     solve(),
     halt().
 
-input(Pat) ->
+in(Pat) ->
     {ok, L} = io:fread("", Pat),
     L.
-
-output(X) ->
-    output(X, " ").
-
-output(X, Sep) when is_list(X) ->
-    Pat = lists:concat(lists:join(Sep, lists:duplicate(length(X), "~p"))),
-    io:format(Pat ++ "~n", X);
-output(X, Sep) ->
-    output([X], Sep).
