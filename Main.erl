@@ -14,9 +14,11 @@ input(Pat) ->
     {ok, L} = io:fread("", Pat),
     L.
 
-output(L) ->
-    output(L, " ").
+output(X) ->
+    output(X, " ").
 
-output(L, Sep) ->
-    Pat = lists:concat(lists:join(Sep, lists:duplicate(length(L), "~p"))),
-    io:format(Pat ++ "~n", L).
+output(X, Sep) when is_list(X) ->
+    Pat = lists:concat(lists:join(Sep, lists:duplicate(length(X), "~p"))),
+    io:format(Pat ++ "~n", X);
+output(X, Sep) ->
+    output([X], Sep).
