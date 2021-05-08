@@ -1,19 +1,20 @@
 -module('Main').
 -export([main/1]).
 
--define(OUT(X),
+-define(OUT(__Y__),
     begin
-        case is_list(X) orelse is_binary(X) of
-            true -> io:format("~s~n", [X]);
-            false -> io:format("~p~n", [X])
+        __X__ = __Y__,
+        case is_list(__X__) orelse is_binary(__X__) of
+            true -> io:format("~s~n", [__X__]);
+            false -> io:format("~p~n", [__X__])
         end
     end).
--define(OUT_L(L, Sep),
+-define(OUT_L(__L__, __Sep__),
     begin
-        Pat = lists:concat(lists:join(Sep, lists:duplicate(length(L), "~p"))),
-        io:format(Pat ++ "~n", L)
+        __Pat__ = lists:concat(lists:join(__Sep__, lists:duplicate(length(__L__), "~p"))),
+        io:format(__Pat__ ++ "~n", __L__)
     end).
--define(OUT_L(L), ?OUT_L(L, " ")).
+-define(OUT_L(__L__), ?OUT_L(__L__, " ")).
 
 solve() ->
     [S] = in("~s"),
