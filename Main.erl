@@ -1,7 +1,13 @@
 -module('Main').
 -export([main/1]).
 
--define(OUT(S), io:format("~s~n", [S])).
+-define(OUT(X),
+    begin
+        case is_list(X) orelse is_binary(X) of
+            true -> io:format("~s~n", [X]);
+            false -> io:format("~p~n", [X])
+        end
+    end).
 -define(OUT_L(L, Sep),
     begin
         Pat = lists:concat(lists:join(Sep, lists:duplicate(length(L), "~p"))),
@@ -11,7 +17,9 @@
 
 solve() ->
     [S] = in("~s"),
-    % [N] = input("~d")
+    % [N] = in("~d"),
+    % Pat = "~d" ++ lists:append(lists:duplicate(N-1, " ~d")),
+    % L = in(Pat),
     ?OUT(S),
     ok.
 
