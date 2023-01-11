@@ -1,2 +1,2 @@
-# AtCoder
+# AtCoder Template
 AtCoder のテンプレート集
